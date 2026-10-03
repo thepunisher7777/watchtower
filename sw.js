@@ -1,4 +1,4 @@
-const CACHE='watchtower-v1.0.2';
+const CACHE='watchtower-v1.0.3';
 const STATIC=['./','./index.html','./privacy.html','./manifest.webmanifest','./icon.svg','./app.css','./app-1.css','./app-2.css','./app-3.css','./app.js','./app-1.js','./app-2.js','./app-3.js','./app-4.js','./app-5.js','./app-6.js','./app-7.js','./register-sw.js'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(STATIC)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
