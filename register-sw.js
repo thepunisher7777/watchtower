@@ -1,1 +1,1 @@
-if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
+(()=>{const s=document.createElement('script');s.src='./app-7.js';s.async=false;document.head.appendChild(s);if('serviceWorker' in navigator&&location.protocol!=='file:')navigator.serviceWorker.register('./sw.js').catch(()=>{});})();
