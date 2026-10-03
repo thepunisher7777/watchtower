@@ -3,10 +3,10 @@ function renderV4Cloud(){if(!$('#v4CloudPill'))return;const s=session(),ok=!!s;$
 function shareCloudConfigWithExtension(){const cfg=v4cfg(),s=session();if(!s)return;window.postMessage({source:'FLOWWATCH_WEB',type:'CLOUD_CONFIG',config:{supabaseUrl:cfg.supabaseUrl,supabaseAnonKey:cfg.supabaseAnonKey,accessToken:s.access_token,refreshToken:s.refresh_token,userId:s.user?.id||s.user_id||''}},'*')}
 const baseRenderAllV4=renderAll;renderAll=function(){baseRenderAllV4();if($('#v4PersonalShelf')){renderV4Shelf();applyV4Visuals();renderV4Extension();renderV4Cloud()}};
 injectV4UI();window.postMessage({source:'FLOWWATCH_WEB',type:'HELLO'},'*');window.postMessage({source:'FLOWWATCH_WEB',type:'PULL_EVENTS'},'*');shareCloudConfigWithExtension();if(session())setTimeout(()=>cloudSync(false),1600);setInterval(()=>{if(session())cloudSync(false);renderV4Extension()},30000);
-// =============== END WATCHTOWER V4 ADDONS ===============
+// =============== END FLOWWATCH V4 ADDONS ===============
 
 
-// =============== WATCHTOWER V5 · SKIPPER FUSION ===============
+// =============== FLOWWATCH V5 · ANIFLOW FUSION ===============
 const AF_LOCAL_KEY='flowwatch_v5_aniflow';
 const AF_DEFAULT={enabled:true,autoSkip:true,autoNext:true,resumeAssist:true,openingSec:90,scope:'safe',customHosts:[]};
 let afCfg=(()=>{try{return {...AF_DEFAULT,...JSON.parse(localStorage.getItem(AF_LOCAL_KEY)||'{}')}}catch(_){return {...AF_DEFAULT}}})();
@@ -27,7 +27,7 @@ window.addEventListener('message',e=>{const d=e.data||{};if(d.source!=='FLOWWATC
 const commitBeforeV5=commit;commit=function(reason='update',enqueue=true){commitBeforeV5(reason,enqueue);if(!extStateSyncing)fwPost('STATE_SET',{state:clone(state)})};
 setTimeout(()=>{fwPost('STATE_GET');requestAf();fillAfForm()},350);
 setInterval(()=>{requestAf();renderAf()},20000);
-// =============== END WATCHTOWER V5 · SKIPPER FUSION ===============
+// =============== END FLOWWATCH V5 · ANIFLOW FUSION ===============
 
-renderAll();setTimeout(()=>hydrateAll(false),500);setTimeout(()=>testHealth(),900);
+renderAll();initProfileSetup();setTimeout(()=>hydrateAll(false),500);setTimeout(()=>testHealth(),900);
 window.addEventListener('error',e=>{console.error(e.error||e.message);state.notifications.unshift({id:uid(),title:'Error controlado',body:'WatchTower ha detectado un error de interfaz. Tus datos locales siguen guardados.',at:now(),read:false});try{localStorage.setItem(KEY,JSON.stringify(state))}catch(_){}});
