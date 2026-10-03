@@ -1,0 +1,33 @@
+'use strict';
+function renderV4Cloud(){if(!$('#v4CloudPill'))return;const s=session(),ok=!!s;$('#v4CloudPill').className=`livepill ${ok?'ok':'warn'}`;$('#v4CloudPill').innerHTML=`<i class="statusdot"></i>${ok?'Conectada':'Offline'}`;$('#v4CloudText').textContent=ok?`Cuenta conectada · ${state.v4.cloud.lastSync?humanAgo(state.v4.cloud.lastSync):'sin sync aún'}`:'Sin configurar'}
+function shareCloudConfigWithExtension(){const cfg=v4cfg(),s=session();if(!s)return;window.postMessage({source:'FLOWWATCH_WEB',type:'CLOUD_CONFIG',config:{supabaseUrl:cfg.supabaseUrl,supabaseAnonKey:cfg.supabaseAnonKey,accessToken:s.access_token,refreshToken:s.refresh_token,userId:s.user?.id||s.user_id||''}},'*')}
+const baseRenderAllV4=renderAll;renderAll=function(){baseRenderAllV4();if($('#v4PersonalShelf')){renderV4Shelf();applyV4Visuals();renderV4Extension();renderV4Cloud()}};
+injectV4UI();window.postMessage({source:'FLOWWATCH_WEB',type:'HELLO'},'*');window.postMessage({source:'FLOWWATCH_WEB',type:'PULL_EVENTS'},'*');shareCloudConfigWithExtension();if(session())setTimeout(()=>cloudSync(false),1600);setInterval(()=>{if(session())cloudSync(false);renderV4Extension()},30000);
+// =============== END WATCHTOWER V4 ADDONS ===============
+
+
+// =============== WATCHTOWER V5 · SKIPPER FUSION ===============
+const AF_LOCAL_KEY='flowwatch_v5_aniflow';
+const AF_DEFAULT={enabled:true,autoSkip:true,autoNext:true,resumeAssist:true,openingSec:90,scope:'safe',customHosts:[]};
+let afCfg=(()=>{try{return {...AF_DEFAULT,...JSON.parse(localStorage.getItem(AF_LOCAL_KEY)||'{}')}}catch(_){return {...AF_DEFAULT}}})();
+let afRuntime={connected:false,status:null,lastReply:0};
+let extStateSyncing=false;
+function fwPost(type,payload={}){window.postMessage({source:'FLOWWATCH_WEB',type,...payload},'*')}
+function afPersist(){try{localStorage.setItem(AF_LOCAL_KEY,JSON.stringify(afCfg))}catch(_){} }
+function setSwitch(el,on){if(!el)return;el.classList.toggle('on',!!on)}
+function collectAf(){afCfg={...afCfg,enabled:$('#afEnabled')?.classList.contains('on')!==false,autoSkip:$('#afAutoSkip')?.classList.contains('on')!==false,autoNext:$('#afAutoNext')?.classList.contains('on')!==false,resumeAssist:$('#afResume')?.classList.contains('on')!==false,openingSec:Math.max(30,Math.min(180,Number($('#afOpeningSec')?.value)||90)),scope:$('#afScope')?.value||'safe',customHosts:String($('#afHosts')?.value||'').split(',').map(x=>x.trim()).filter(Boolean)};afPersist();return afCfg}
+function fillAfForm(){setSwitch($('#afEnabled'),afCfg.enabled);setSwitch($('#afAutoSkip'),afCfg.autoSkip);setSwitch($('#afAutoNext'),afCfg.autoNext);setSwitch($('#afResume'),afCfg.resumeAssist);if($('#afOpeningSec'))$('#afOpeningSec').value=afCfg.openingSec;if($('#afScope'))$('#afScope').value=afCfg.scope;if($('#afHosts'))$('#afHosts').value=(afCfg.customHosts||[]).join(', ');renderAf()}
+function renderAf(){if(!$('#afMasterPill'))return;const ext=state.v4?.extension?.connected&&now()-(state.v4.extension.lastHeartbeat||0)<45000;const st=afRuntime.status;$('#afMasterPill').className=`livepill ${ext&&afCfg.enabled?'ok':'warn'}`;$('#afMasterPill').innerHTML=`<i class="statusdot"></i>${ext?(afCfg.enabled?'Skipper activo':'Skipper pausado'):'Esperando extensión'}`;$('#afScopePill').textContent=afCfg.scope==='safe'?'Modo seguro':'Hosts personalizados';$('#afEnginePill').className=`livepill ${st?.videoFound?'ok':st?.seen?'warn':''}`;$('#afEnginePill').textContent=st?.videoFound?'Vídeo detectado':st?.seen?'Engine detectado':'Engine sin comprobar';$('#afHost').textContent=st?.host||'—';$('#afVideo').textContent=st?.videoFound?(st.inFrame?'Detectado · iframe':'Detectado · página'):'No detectado';$('#afControl').textContent=st?.control==='direct'?'Directo':st?.control==='limited'?'Limitado':'—';$('#afLastSkip').textContent=st?.lastSkipAt?humanAgo(st.lastSkipAt):'—';$('#afSessionState').className=`state ${st?.videoFound?(st.control==='direct'?'ok':'warn'):'plan'}`;$('#afSessionState').textContent=st?.videoFound?(st.control==='direct'?'Control directo':'Limitado'):'Sin sesión';$('#afLiveBody').innerHTML=st?.seen?`<strong>${esc(st.title||'Reproductor')}</strong><br>${esc(st.host||'—')} · ${st.inFrame?'iframe':'página principal'} · ${st.videoFound?'vídeo accesible':'sin vídeo accesible'}${Number.isFinite(st.progress)?` · ${Math.round(st.progress)}%`:''}${st.note?`<br>${esc(st.note)}`:''}`:'Abre un episodio en una pestaña. El engine informará de host, iframe, vídeo, posición y capacidad de control.';}
+function requestAf(){fwPost('ANIFLOW_GET')}
+function saveAf(show=true){collectAf();fwPost('ANIFLOW_SET',{settings:afCfg});renderAf();if(show)toast('Ajustes de Skipper enviados a la extensión')}
+['afEnabled','afAutoSkip','afAutoNext','afResume'].forEach(id=>{const el=$('#'+id);if(el)el.onclick=()=>{el.classList.toggle('on');saveAf(false)}});
+$('#afScope')?.addEventListener('change',()=>saveAf(false));$('#afOpeningSec')?.addEventListener('change',()=>saveAf(false));
+$('#afSave')?.addEventListener('click',()=>saveAf(true));$('#afRefresh')?.addEventListener('click',()=>{requestAf();toast('Estado solicitado')});$('#afPing')?.addEventListener('click',()=>{fwPost('ANIFLOW_PING');toast('Comprobando pestañas con vídeo…')});$('#afReset')?.addEventListener('click',()=>{afCfg={...AF_DEFAULT};afPersist();fillAfForm();saveAf(false);toast('Skipper restablecido')});
+window.addEventListener('message',e=>{const d=e.data||{};if(d.source!=='FLOWWATCH_EXTENSION')return;if(d.type==='ANIFLOW_STATE'){if(d.settings){afCfg={...AF_DEFAULT,...d.settings};afPersist();fillAfForm()}if(d.status){afRuntime.status=d.status;afRuntime.lastReply=now()}renderAf()}if(d.type==='CENTER_STATE'&&d.state){const remote=d.state;if(remote&&Number(remote.updatedAt||0)>Number(state.updatedAt||0)+400){extStateSyncing=true;state=remote;try{localStorage.setItem(KEY,JSON.stringify(state))}catch(_){}extStateSyncing=false;renderAll();renderV4();renderAf()}}});
+const commitBeforeV5=commit;commit=function(reason='update',enqueue=true){commitBeforeV5(reason,enqueue);if(!extStateSyncing)fwPost('STATE_SET',{state:clone(state)})};
+setTimeout(()=>{fwPost('STATE_GET');requestAf();fillAfForm()},350);
+setInterval(()=>{requestAf();renderAf()},20000);
+// =============== END WATCHTOWER V5 · SKIPPER FUSION ===============
+
+renderAll();setTimeout(()=>hydrateAll(false),500);setTimeout(()=>testHealth(),900);
+window.addEventListener('error',e=>{console.error(e.error||e.message);state.notifications.unshift({id:uid(),title:'Error controlado',body:'WatchTower ha detectado un error de interfaz. Tus datos locales siguen guardados.',at:now(),read:false});try{localStorage.setItem(KEY,JSON.stringify(state))}catch(_){}});
