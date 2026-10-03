@@ -14,3 +14,7 @@
 @media(max-width:1000px){.afgrid{grid-template-columns:1fr}.afstats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){.afstats{grid-template-columns:repeat(2,1fr)}.afcompat{grid-template-columns:1fr}.afpanel{padding:14px}.afrow{align-items:flex-start;flex-direction:column}.afcontrols{width:100%}}
 /* =============== END FLOWWATCH V5 =============== */
+
+
+/* WatchTower 1.0.1 · clean first-run */
+#welcomeModal .modal{border-color:rgba(121,179,255,.18)}#welcomeModal .eyebrow{margin-bottom:6px}.profilelabel{white-space:nowrap}
