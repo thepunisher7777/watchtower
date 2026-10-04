@@ -1,5 +1,5 @@
-const CACHE='watchtower-v1.2.4';
-const STATIC=['./','./index.html','./privacy.html','./manifest.webmanifest','./icon.svg','./app.css','./app-1.css','./app-2.css','./app-3.css','./streaming-importer.css','./app.js','./app-1.js','./app-2.js','./app-3.js','./app-4.js','./app-5.js','./app-6.js','./app-7.js','./app-8.js','./app-9.js','./app-10.js','./app-11.js','./app-12.js','./app-13.js','./app-14.js','./app-15.js','./app-16.js','./register-sw.js'];
+const CACHE='watchtower-v1.3.0';
+const STATIC=['./','./index.html','./privacy.html','./manifest.webmanifest','./icon.svg','./app.css','./app-1.css','./app-2.css','./app-3.css','./streaming-importer.css','./app.js','./app-1.js','./app-2.js','./app-3.js','./app-4.js','./app-5.js','./app-6.js','./app-7.js','./app-8.js','./app-9.js','./app-10.js','./app-11.js','./app-12.js','./app-13.js','./app-14.js','./app-15.js','./app-16.js','./app-17.js','./register-sw.js'];
 self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(STATIC)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(u.origin!==location.origin)return;e.respondWith(fetch(e.request).then(r=>{const copy=r.clone();caches.open(CACHE).then(c=>c.put(e.request,copy));return r}).catch(()=>caches.match(e.request).then(r=>r||caches.match('./index.html'))))});
