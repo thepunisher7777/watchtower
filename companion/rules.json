@@ -1,0 +1,398 @@
+{
+  "version": 3,
+  "sites": {
+    "jkanime": {
+      "hosts": [
+        "jkanime.net",
+        "www.jkanime.net"
+      ],
+      "skipIntroSelectors": [],
+      "nextSelectors": [
+        "a[rel='next']",
+        "a[aria-label*='siguiente' i]",
+        "a[title*='siguiente' i]"
+      ],
+      "playSelectors": [
+        ".vjs-big-play-button",
+        ".plyr__control--overlaid",
+        ".jw-icon-playback",
+        ".jw-display-icon-container",
+        ".play-button",
+        ".btn-play",
+        ".big-play-button",
+        ".video-play-button"
+      ]
+    },
+    "crunchyroll": {
+      "hosts": [
+        "crunchyroll.com"
+      ],
+      "skipIntroSelectors": [
+        "[data-t='skip-intro-button']",
+        "[data-testid*='skip-intro' i]",
+        "button[aria-label*='Skip Intro' i]"
+      ],
+      "nextSelectors": [
+        "[data-t='next-episode-button']",
+        "[data-testid*='next-episode' i]",
+        "button[aria-label*='Next Episode' i]"
+      ],
+      "skipRecapSelectors": [
+        "[data-t='skip-recap-button']",
+        "[data-testid*='skip-recap' i]",
+        "button[aria-label*='Skip Recap' i]",
+        "button[aria-label*='Omitir resumen' i]"
+      ]
+    },
+    "netflix": {
+      "hosts": [
+        "netflix.com"
+      ],
+      "skipIntroSelectors": [
+        "[data-uia='player-skip-intro']",
+        ".watch-video--skip-content-button"
+      ],
+      "nextSelectors": [
+        "[data-uia='next-episode-seamless-button']",
+        ".button-nfplayerNextEpisode"
+      ]
+    },
+    "disneyplus": {
+      "hosts": [
+        "disneyplus.com"
+      ],
+      "skipIntroSelectors": [
+        "[data-testid*='skip-intro' i]",
+        "button[aria-label*='Skip Intro' i]"
+      ],
+      "nextSelectors": [
+        "[data-testid*='next-episode' i]",
+        "button[aria-label*='Next Episode' i]"
+      ]
+    },
+    "primevideo": {
+      "hosts": [
+        "primevideo.com",
+        "amazon.com"
+      ],
+      "skipIntroSelectors": [
+        "[data-testid*='skip-intro' i]",
+        ".atvwebplayersdk-skipelement-button",
+        "button[aria-label*='Skip Intro' i]"
+      ],
+      "nextSelectors": [
+        "[data-testid*='next-episode' i]",
+        "button[aria-label*='Next Episode' i]"
+      ]
+    },
+    "hidive": {
+      "hosts": [
+        "hidive.com"
+      ],
+      "skipIntroSelectors": [
+        "[data-testid*='skip-intro' i]",
+        "button[aria-label*='Skip Intro' i]"
+      ],
+      "nextSelectors": [
+        "[data-testid*='next-episode' i]",
+        "button[aria-label*='Next Episode' i]"
+      ]
+    },
+    "max": {
+      "hosts": [
+        "max.com",
+        "hbomax.com"
+      ],
+      "skipIntroSelectors": [
+        "[data-testid*='skip-intro' i]",
+        "[data-testid*='skip-opening' i]",
+        "button[aria-label*='Skip Intro' i]",
+        "button[aria-label*='Saltar intro' i]"
+      ],
+      "nextSelectors": [
+        "[data-testid*='next-episode' i]",
+        "button[aria-label*='Next Episode' i]",
+        "button[aria-label*='Siguiente episodio' i]"
+      ]
+    },
+    "appletv": {
+      "hosts": [
+        "tv.apple.com"
+      ],
+      "skipIntroSelectors": [
+        "[data-testid*='skip-intro' i]",
+        "[data-testid*='skip-opening' i]",
+        "button[aria-label*='Skip Intro' i]",
+        "button[aria-label*='Saltar intro' i]"
+      ],
+      "nextSelectors": [
+        "[data-testid*='next-episode' i]",
+        "button[aria-label*='Next Episode' i]",
+        "button[aria-label*='Siguiente episodio' i]"
+      ]
+    },
+    "paramount": {
+      "hosts": [
+        "paramountplus.com"
+      ],
+      "skipIntroSelectors": [
+        "[data-testid*='skip-intro' i]",
+        "[data-testid*='skip-opening' i]",
+        "button[aria-label*='Skip Intro' i]",
+        "button[aria-label*='Saltar intro' i]"
+      ],
+      "nextSelectors": [
+        "[data-testid*='next-episode' i]",
+        "button[aria-label*='Next Episode' i]",
+        "button[aria-label*='Siguiente episodio' i]"
+      ]
+    },
+    "hulu": {
+      "hosts": [
+        "hulu.com"
+      ],
+      "skipIntroSelectors": [
+        "[data-testid*='skip-intro' i]",
+        "[data-testid*='skip-opening' i]",
+        "button[aria-label*='Skip Intro' i]",
+        "button[aria-label*='Saltar intro' i]"
+      ],
+      "nextSelectors": [
+        "[data-testid*='next-episode' i]",
+        "button[aria-label*='Next Episode' i]",
+        "button[aria-label*='Siguiente episodio' i]"
+      ]
+    },
+    "peacock": {
+      "hosts": [
+        "peacocktv.com"
+      ],
+      "skipIntroSelectors": [
+        "[data-testid*='skip-intro' i]",
+        "[data-testid*='skip-opening' i]",
+        "button[aria-label*='Skip Intro' i]",
+        "button[aria-label*='Saltar intro' i]"
+      ],
+      "nextSelectors": [
+        "[data-testid*='next-episode' i]",
+        "button[aria-label*='Next Episode' i]",
+        "button[aria-label*='Siguiente episodio' i]"
+      ]
+    },
+    "skyshowtime": {
+      "hosts": [
+        "skyshowtime.com"
+      ],
+      "skipIntroSelectors": [
+        "[data-testid*='skip-intro' i]",
+        "[data-testid*='skip-opening' i]",
+        "button[aria-label*='Skip Intro' i]",
+        "button[aria-label*='Saltar intro' i]"
+      ],
+      "nextSelectors": [
+        "[data-testid*='next-episode' i]",
+        "button[aria-label*='Next Episode' i]",
+        "button[aria-label*='Siguiente episodio' i]"
+      ]
+    },
+    "movistarplus": {
+      "hosts": [
+        "movistarplus.es"
+      ],
+      "skipIntroSelectors": [
+        "[data-testid*='skip-intro' i]",
+        "[data-testid*='skip-opening' i]",
+        "button[aria-label*='Skip Intro' i]",
+        "button[aria-label*='Saltar intro' i]"
+      ],
+      "nextSelectors": [
+        "[data-testid*='next-episode' i]",
+        "button[aria-label*='Next Episode' i]",
+        "button[aria-label*='Siguiente episodio' i]"
+      ]
+    },
+    "filmin": {
+      "hosts": [
+        "filmin.es"
+      ],
+      "skipIntroSelectors": [
+        "[data-testid*='skip-intro' i]",
+        "[data-testid*='skip-opening' i]",
+        "button[aria-label*='Skip Intro' i]",
+        "button[aria-label*='Saltar intro' i]"
+      ],
+      "nextSelectors": [
+        "[data-testid*='next-episode' i]",
+        "button[aria-label*='Next Episode' i]",
+        "button[aria-label*='Siguiente episodio' i]"
+      ]
+    },
+    "animeflv": {
+      "hosts": [
+        "animeflv.net"
+      ],
+      "skipIntroSelectors": [],
+      "nextSelectors": [
+        "a[rel='next']",
+        "a[aria-label*='siguiente' i]",
+        "button[aria-label*='siguiente' i]",
+        "a[title*='siguiente' i]",
+        "button[title*='siguiente' i]"
+      ],
+      "playSelectors": [
+        ".vjs-big-play-button",
+        ".plyr__control--overlaid",
+        ".jw-icon-playback",
+        ".jw-display-icon-container",
+        ".play-button",
+        ".btn-play",
+        ".big-play-button",
+        ".video-play-button",
+        "[aria-label*='Play' i]",
+        "[title*='Play' i]"
+      ]
+    },
+    "tioanime": {
+      "hosts": [
+        "tioanime.com"
+      ],
+      "skipIntroSelectors": [],
+      "nextSelectors": [
+        "a[rel='next']",
+        "a[aria-label*='siguiente' i]",
+        "button[aria-label*='siguiente' i]",
+        "a[title*='siguiente' i]",
+        "button[title*='siguiente' i]"
+      ],
+      "playSelectors": [
+        ".vjs-big-play-button",
+        ".plyr__control--overlaid",
+        ".jw-icon-playback",
+        ".jw-display-icon-container",
+        ".play-button",
+        ".btn-play",
+        ".big-play-button",
+        ".video-play-button",
+        "[aria-label*='Play' i]",
+        "[title*='Play' i]"
+      ]
+    },
+    "animeav1": {
+      "hosts": [
+        "animeav1.com"
+      ],
+      "skipIntroSelectors": [],
+      "nextSelectors": [
+        "a[rel='next']",
+        "a[aria-label*='siguiente' i]",
+        "button[aria-label*='siguiente' i]",
+        "a[title*='siguiente' i]",
+        "button[title*='siguiente' i]"
+      ],
+      "playSelectors": [
+        ".vjs-big-play-button",
+        ".plyr__control--overlaid",
+        ".jw-icon-playback",
+        ".jw-display-icon-container",
+        ".play-button",
+        ".btn-play",
+        ".big-play-button",
+        ".video-play-button",
+        "[aria-label*='Play' i]",
+        "[title*='Play' i]"
+      ]
+    },
+    "animefenix": {
+      "hosts": [
+        "animefenix.com"
+      ],
+      "skipIntroSelectors": [],
+      "nextSelectors": [
+        "a[rel='next']",
+        "a[aria-label*='siguiente' i]",
+        "button[aria-label*='siguiente' i]",
+        "a[title*='siguiente' i]",
+        "button[title*='siguiente' i]"
+      ],
+      "playSelectors": [
+        ".vjs-big-play-button",
+        ".plyr__control--overlaid",
+        ".jw-icon-playback",
+        ".jw-display-icon-container",
+        ".play-button",
+        ".btn-play",
+        ".big-play-button",
+        ".video-play-button",
+        "[aria-label*='Play' i]",
+        "[title*='Play' i]"
+      ]
+    }
+  },
+  "textPatterns": {
+    "intro": [
+      "skip intro",
+      "saltar intro",
+      "saltar opening",
+      "omitir intro",
+      "skip opening",
+      "saltar cabecera",
+      "omitir introducción",
+      "omitir introduccion",
+      "saltar introducción",
+      "saltar introduccion",
+      "skip credits",
+      "passer l'intro",
+      "passer l’intro",
+      "pular abertura",
+      "pular introdução",
+      "pular introducao",
+      "salta intro",
+      "salta sigla",
+      "intro überspringen",
+      "intro uberspringen",
+      "omitir cabecera",
+      "skip opening credits"
+    ],
+    "recap": [
+      "skip recap",
+      "saltar resumen",
+      "omitir resumen",
+      "skip previously",
+      "saltar recap",
+      "omitir recap",
+      "saltar recapitulación",
+      "saltar recapitulacion",
+      "omitir recapitulación",
+      "omitir recapitulacion"
+    ],
+    "next": [
+      "next episode",
+      "siguiente episodio",
+      "próximo episodio",
+      "proximo episodio",
+      "próximo",
+      "proximo",
+      "siguiente capítulo",
+      "siguiente capitulo",
+      "next",
+      "prochain épisode",
+      "prochain episode",
+      "próximo episódio",
+      "episodio successivo",
+      "nächste folge",
+      "nachste folge",
+      "siguiente",
+      "episodio siguiente",
+      "capítulo siguiente",
+      "capitulo siguiente",
+      "ver siguiente",
+      "seguir al siguiente"
+    ],
+    "play": [
+      "play",
+      "reproducir",
+      "continuar reproducción",
+      "continuar reproduccion"
+    ]
+  }
+}

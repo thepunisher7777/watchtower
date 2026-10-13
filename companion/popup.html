@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WatchTower Companion</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<main>
+  <header>
+    <div class="brand">
+      <div class="logo"><img src="icons/icon48.png" alt="WatchTower"></div>
+      <div class="brandCopy"><h1>WatchTower</h1><p id="pageStatus">Companion · Detectando…</p></div>
+    </div>
+    <label class="master" title="Activar o desactivar Skipper"><input id="enabled" type="checkbox"><span></span></label>
+  </header>
+
+  <nav class="productTabs">
+    <button class="active" data-product-tab="watchtower">WatchTower</button>
+    <button data-product-tab="skipper">Skipper</button>
+  </nav>
+
+  <section id="watchtowerPanel" class="productPanel active">
+    <section class="centerHero">
+      <div class="centerMark"><img src="icons/icon128.png" alt=""></div>
+      <div><span>Centro de control</span><strong>WatchTower by ARX</strong><p>Biblioteca, progreso, Mi lista y seguimiento en un solo sitio.</p></div>
+    </section>
+    <button id="openWatchTower" class="centerPrimary">Abrir WatchTower</button>
+    <div class="centerActions"><button id="openImporter">⇄ Importar streaming</button><button id="scanStreaming">↻ Escanear ahora</button></div>
+
+    <section class="centerGrid">
+      <div class="centerStat"><span>Servicio activo</span><strong id="wtCurrentService">—</strong></div>
+      <div class="centerStat"><span>Seguir viendo</span><strong id="wtContinueCount">0</strong></div>
+      <div class="centerStat"><span>Mi lista</span><strong id="wtWatchlistCount">0</strong></div>
+      <div class="centerStat"><span>Detectados</span><strong id="wtDetectedCount">0</strong></div>
+    </section>
+
+    <section class="centerCard">
+      <div class="centerCardHead"><div><span>Streaming Importer</span><strong>Mi lista + progreso visible</strong></div><span id="wtImporterHealth" class="status">Esperando</span></div>
+      <p id="wtImporterText">Abre Netflix, Disney+, Prime Video, Max, Crunchyroll u otro servicio compatible.</p>
+      <small>WatchTower no consulta el vídeo protegido ni el historial oculto de tu cuenta.</small>
+    </section>
+
+    <section class="centerCard skipperMini">
+      <div><span>Motor integrado</span><strong>Skipper</strong><p>AutoSkip · AutoNext · Resume · Safe DRM</p></div>
+      <button id="goSkipper">Abrir</button>
+    </section>
+  </section>
+
+  <section id="skipperPanel" class="productPanel">
+    <section class="summary">
+      <div><span>Tiempo ahorrado</span><strong id="savedTime">0 min</strong><small id="savedSub">0 saltos</small></div>
+      <div class="summaryRight"><span id="healthChip" class="status">Comprobando…</span><small id="progressText">—</small></div>
+    </section>
+    <section class="quick"><button data-preset="marathon" class="active">Maratón</button><button data-preset="normal">Normal</button><button data-preset="oponly">Solo OP</button><button data-preset="manual">Manual</button></section>
+    <section class="card"><label><span>Opening</span><input id="skipOP" type="checkbox"></label><label><span>Resumen / recap</span><input id="skipRecap" type="checkbox"></label><label><span>Ending</span><input id="skipED" type="checkbox"></label><label><span>Siguiente episodio</span><input id="autoNext" type="checkbox"></label><label><span>Play automático</span><input id="autoPlayNext" type="checkbox"></label></section>
+    <section class="card"><label><span>Cuenta atrás</span><input id="countdownEnabled" type="checkbox"></label><label><span>Smart Skip</span><input id="smartSkipLearning" type="checkbox"></label><label><span>Ocultar panel al reproducir</span><input id="hudAutoHide" type="checkbox"></label><label><span>Modo cine</span><input id="cinemaMode" type="checkbox"></label></section>
+    <section class="session"><div><span>Sesión</span><strong id="sessionEpisodes">0 episodios</strong></div><div><span>Ahorrado</span><strong id="sessionSaved">0 s</strong></div></section>
+    <section class="card"><label><span>Respetar retroceso manual</span><input id="respectManualRewind" type="checkbox"></label><small style="display:block;opacity:.65;padding:0 12px 10px">Si vuelves atrás dentro de un opening/resumen, Skipper no te empuja otra vez al final del tramo.</small></section>
+    <section class="card compact">
+      <label class="selectRow"><span>Al volver a un episodio</span><select id="resumeBehavior"><option value="continue">Continuar</option><option value="restart">Desde cero</option><option value="ignore">Preguntar</option></select></label>
+      <label class="selectRow"><span>Temporizador</span><select id="sleepTimerMinutes"><option value="0">Desactivado</option><option value="15">15 min</option><option value="30">30 min</option><option value="45">45 min</option><option value="60">60 min</option><option value="90">90 min</option></select></label>
+    </section>
+    <section class="current"><div class="currentTop"><div><span>Ahora viendo</span><strong id="seriesInfo">Abre un episodio compatible</strong></div><button id="favorite" class="favorite" aria-label="Favorito">☆</button></div></section>
+    <section class="continue"><span>Continuar viendo</span><div id="continueBox">Sin historial todavía.</div></section>
+    <details><summary>Opciones avanzadas</summary><div class="advanced"><label class="switchLine"><span>Modo compatibilidad</span><input id="compatibilityMode" type="checkbox"></label><div class="mapping"><input id="malId" inputmode="numeric" placeholder="MyAnimeList ID"><input id="manualTitle" placeholder="Nombre de la serie"></div><div class="actions"><button id="saveMapping">Guardar coincidencia</button><button id="clearMapping" class="secondary">Automático</button></div><div class="shortcutText">Alt+S saltar · Alt+N siguiente · Alt+P play/pausa · Alt+A activar</div></div></details>
+    <footer><button id="diagnostic">Diagnóstico</button><button id="advanced">Ajustes</button></footer>
+  </section>
+</main>
+<script src="popup.js"></script>
+</body>
+</html>
