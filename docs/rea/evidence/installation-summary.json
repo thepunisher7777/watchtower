@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-13",
+  "host": "Linux x86_64 / Ubuntu 24.04 remote container",
+  "node": "24.19.0",
+  "npm": "11.9.0",
+  "rea": "6.4.0",
+  "codex_and_skill_healthy": true,
+  "unrelated_config_preserved": true,
+  "native_engines_detected": [],
+  "package_integrity": "sha512-Vj1zWfSlna5bphGoaoI/TcVBuYvze9u+OyPC3Shz8YkBqaCTqB4COnnRoX7XDwMpwI24ZlFEel2yEj0k8LTWEQ==",
+  "persistent_on_user_pc": false,
+  "account_skill_saved": false
+}

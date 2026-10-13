@@ -11,7 +11,7 @@ wtIApply=function(raw,force=false){
   const c=wtINorm(raw);if(!c.title)return false;let t=wtIFind(c);
   if(t?.manualLock&&!force){wtIQueue(c,'Bloqueado manualmente');return false}
   const isWatchlist=c.kind==='watchlist';
-  const season=c.season??Number(t?.currentSeason)||1,episode=c.episode??Number(t?.currentEpisode)||1;
+  const season=c.season??(Number(t?.currentSeason)||1),episode=c.episode??(Number(t?.currentEpisode)||1);
   if(!t){
     const autoContinue=state.settings.autoAddHighConfidence&&c.confidence>=.88&&c.kind==='continue-watching'&&c.progress>0;
     const autoList=state.settings.autoImportWatchlist!==false&&c.confidence>=.82&&isWatchlist;
