@@ -37,4 +37,4 @@ Requisitos implementados:
 
 ## Investigación pendiente
 
-Falta el repositorio de Companion: no se puede verificar inicio/cambio de episodio en servicios externos. Tampoco puede demostrarse sincronización real entre dispositivos sin sesiones y un entorno de prueba autorizado. El receptor y la serialización sí están probados localmente. REA merece otra prueba en un host con procesos coherentes; para estos defectos con fuente disponible, las pruebas y el análisis directo son más útiles que la ingeniería inversa profunda.
+Se recuperó la entrega original Companion DEV 0.9.2, ahora en `companion/`, y se verificó su protocolo con scripts originales y pruebas DOM. Inicio/cambio de episodio en servicios externos sigue sin verificarse. Tampoco puede demostrarse sincronización real entre dispositivos sin sesiones y un entorno de prueba autorizado. El receptor y la serialización sí están probados localmente. REA merece otra prueba en un host con procesos coherentes; para estos defectos con fuente disponible, las pruebas y el análisis directo son más útiles que la ingeniería inversa profunda.

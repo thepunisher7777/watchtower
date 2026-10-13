@@ -1,0 +1,250 @@
+{
+  "manifest_version": 3,
+  "name": "WatchTower Companion",
+  "version": "0.9.3",
+  "description": "WatchTower Companion con Skipper: matriz nativa multiplataforma, Streaming Importer protegido y AutoNext seguro.",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://api.aniskip.com/*",
+    "https://api.jikan.moe/*",
+    "https://jkanime.net/*",
+    "https://www.jkanime.net/*",
+    "https://animeflv.net/*",
+    "https://*.animeflv.net/*",
+    "https://tioanime.com/*",
+    "https://www.tioanime.com/*",
+    "https://animeav1.com/*",
+    "https://www.animeav1.com/*",
+    "https://animefenix.com/*",
+    "https://www.animefenix.com/*",
+    "https://animefenix2.tv/*",
+    "https://www.animefenix2.tv/*",
+    "https://*.crunchyroll.com/*",
+    "https://www.netflix.com/*",
+    "https://www.disneyplus.com/*",
+    "https://www.primevideo.com/*",
+    "https://www.amazon.com/gp/video/*",
+    "https://www.amazon.es/gp/video/*",
+    "https://*.hidive.com/*",
+    "https://*.max.com/*",
+    "https://*.hbomax.com/*",
+    "https://tv.apple.com/*",
+    "https://*.paramountplus.com/*",
+    "https://*.hulu.com/*",
+    "https://*.peacocktv.com/*",
+    "https://*.skyshowtime.com/*",
+    "https://*.movistarplus.es/*",
+    "https://*.filmin.es/*",
+    "https://mubi.com/*",
+    "https://*.mubi.com/*",
+    "https://www.rakuten.tv/*",
+    "https://*.rakuten.tv/*",
+    "https://app.plex.tv/*",
+    "https://*.discoveryplus.com/*",
+    "https://*.britbox.com/*",
+    "https://*.amcplus.com/*",
+    "https://www.atresplayer.com/*",
+    "https://*.atresplayer.com/*",
+    "https://www.rtve.es/play/*",
+    "<all_urls>",
+    "https://thepunisher7777.github.io/watchtower/*",
+    "http://localhost/*",
+    "http://127.0.0.1/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_title": "WatchTower Companion \u00b7 Skipper",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://jkanime.net/*",
+        "https://www.jkanime.net/*",
+        "https://animeflv.net/*",
+        "https://*.animeflv.net/*",
+        "https://tioanime.com/*",
+        "https://www.tioanime.com/*",
+        "https://animeav1.com/*",
+        "https://www.animeav1.com/*",
+        "https://animefenix.com/*",
+        "https://www.animefenix.com/*",
+        "https://animefenix2.tv/*",
+        "https://www.animefenix2.tv/*",
+        "https://*.crunchyroll.com/*"
+      ],
+      "js": [
+        "content.js",
+        "features.js",
+        "fullscreen_resume.js",
+        "fullscreen_iframe_host.js",
+        "polish.js",
+        "streaming_importer.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.netflix.com/*",
+        "https://www.disneyplus.com/*",
+        "https://www.primevideo.com/*",
+        "https://www.amazon.com/gp/video/*",
+        "https://www.amazon.es/gp/video/*",
+        "https://*.hidive.com/*",
+        "https://*.max.com/*",
+        "https://*.hbomax.com/*",
+        "https://tv.apple.com/*",
+        "https://*.paramountplus.com/*",
+        "https://*.hulu.com/*",
+        "https://*.peacocktv.com/*",
+        "https://*.skyshowtime.com/*",
+        "https://*.movistarplus.es/*",
+        "https://*.filmin.es/*",
+        "https://mubi.com/*",
+        "https://*.mubi.com/*",
+        "https://www.rakuten.tv/*",
+        "https://*.rakuten.tv/*",
+        "https://app.plex.tv/*",
+        "https://*.discoveryplus.com/*",
+        "https://*.britbox.com/*",
+        "https://*.amcplus.com/*",
+        "https://www.atresplayer.com/*",
+        "https://*.atresplayer.com/*",
+        "https://www.rtve.es/play/*"
+      ],
+      "js": [
+        "drm_safe.js",
+        "streaming_importer.js"
+      ],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://*.crunchyroll.com/*",
+        "https://www.netflix.com/*",
+        "https://www.disneyplus.com/*",
+        "https://www.primevideo.com/*",
+        "https://www.amazon.com/gp/video/*",
+        "https://www.amazon.es/gp/video/*",
+        "https://*.hidive.com/*",
+        "https://*.max.com/*",
+        "https://*.hbomax.com/*",
+        "https://tv.apple.com/*",
+        "https://*.paramountplus.com/*",
+        "https://*.hulu.com/*",
+        "https://*.peacocktv.com/*",
+        "https://*.skyshowtime.com/*",
+        "https://*.movistarplus.es/*",
+        "https://*.filmin.es/*",
+        "https://mubi.com/*",
+        "https://*.mubi.com/*",
+        "https://www.rakuten.tv/*",
+        "https://*.rakuten.tv/*",
+        "https://app.plex.tv/*",
+        "https://*.discoveryplus.com/*",
+        "https://*.britbox.com/*",
+        "https://*.amcplus.com/*",
+        "https://www.atresplayer.com/*",
+        "https://*.atresplayer.com/*",
+        "https://www.rtve.es/play/*"
+      ],
+      "js": [
+        "frame_resume.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "exclude_matches": [
+        "https://*.crunchyroll.com/*",
+        "https://www.netflix.com/*",
+        "https://www.disneyplus.com/*",
+        "https://www.primevideo.com/*",
+        "https://www.amazon.com/gp/video/*",
+        "https://www.amazon.es/gp/video/*",
+        "https://*.hidive.com/*",
+        "https://*.max.com/*",
+        "https://*.hbomax.com/*",
+        "https://tv.apple.com/*",
+        "https://*.paramountplus.com/*",
+        "https://*.hulu.com/*",
+        "https://*.peacocktv.com/*",
+        "https://*.skyshowtime.com/*",
+        "https://*.movistarplus.es/*",
+        "https://*.filmin.es/*",
+        "https://mubi.com/*",
+        "https://*.mubi.com/*",
+        "https://www.rakuten.tv/*",
+        "https://*.rakuten.tv/*",
+        "https://app.plex.tv/*",
+        "https://*.discoveryplus.com/*",
+        "https://*.britbox.com/*",
+        "https://*.amcplus.com/*",
+        "https://www.atresplayer.com/*",
+        "https://*.atresplayer.com/*",
+        "https://www.rtve.es/play/*"
+      ],
+      "js": [
+        "frame_player.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true
+    },
+    {
+      "matches": [
+        "https://thepunisher7777.github.io/watchtower/*",
+        "http://localhost/*",
+        "http://127.0.0.1/*"
+      ],
+      "js": [
+        "watchtower_bridge.js"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "drm_frame_safe.js"
+      ],
+      "all_frames": true,
+      "match_about_blank": true,
+      "match_origin_as_fallback": true,
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "rules.json"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "version_name": "0.9.3 Playback Integrity DEV"
+}

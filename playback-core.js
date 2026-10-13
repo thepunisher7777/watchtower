@@ -7,6 +7,7 @@ function normalize(raw){
  const action=({play:'start',playing:'start',timeupdate:'progress'})[raw.action]||raw.action;
  if(!['start','progress','pause','stop','ended'].includes(action))return null;
  const e={title:raw.title.trim(),action,provider:typeof raw.provider==='string'?raw.provider.slice(0,80):'Extensión'};
+ if(['anime','series','movie','documentary'].includes(raw.type))e.type=raw.type;
  if(raw.id!=null){if(typeof raw.id!=='string'||!raw.id||raw.id.length>200)return null;e.id=raw.id;}
  for(const k of ['season','episode','position','duration','progress']){
   if(raw[k]==null||raw[k]==='')continue;
@@ -34,7 +35,7 @@ function apply(state,raw,{now=Date.now(),uid=()=>globalThis.crypto.randomUUID()}
  if(sameMarker&&e.occurredAt&&marker.occurredAt&&e.occurredAt<marker.occurredAt)return skip('older-event');
  const alreadyCompleted=sameMarker&&marker.completed||!series&&previous?.status==='finished'||state.history.some(h=>h.titleId===previous?.id&&h.action==='complete'&&h.season===s&&h.episode===ep);
  if(alreadyCompleted)return skip('completed-episode');
- const t=previous?{...previous}:{id:'ext-'+uid(),title:e.title,type:series?'series':'movie',status:'watching',seen:0,total:ep,currentEpisode:ep,currentSeason:s,progressPct:0,positionSec:0,durationSec:0,platform:e.provider,genres:[],year:'',source:'Extensión',metaFetchedAt:0};
+ const t=previous?{...previous}:{id:'ext-'+uid(),title:e.title,type:e.type||(series?'series':'movie'),status:'watching',seen:0,total:ep,currentEpisode:ep,currentSeason:s,progressPct:0,positionSec:0,durationSec:0,platform:e.provider,genres:[],year:'',source:'Extensión',metaFetchedAt:0};
  if(!same){t.progressPct=0;t.positionSec=0;t.durationSec=e.duration||0;}
  if(e.duration!=null)t.durationSec=e.duration;
  const position=e.position==null?undefined:t.durationSec>0?Math.min(e.position,t.durationSec):e.position;

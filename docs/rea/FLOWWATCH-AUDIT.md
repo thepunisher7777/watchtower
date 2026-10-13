@@ -1,6 +1,6 @@
 # Auditoría WatchTower / FlowWatch
 
-Fuente: `thepunisher7777/watchtower`, base `0f6bb58204f45a110d5a8caca3b7476a0b493fbb`. README identifica WatchTower Web, Companion y Skipper. Código accesible: web/PWA; no hay código fuente de la extensión en este repositorio. No había pruebas ni package.json en la base; no se encontraron issues abiertos al consultar GitHub.
+Fuente: `thepunisher7777/watchtower`, base `0f6bb58204f45a110d5a8caca3b7476a0b493fbb`. README identifica WatchTower Web, Companion y Skipper. La base Git contenía solo web/PWA. Después se recuperó el código original de Companion DEV 0.9.2 de una entrega guardada y se incorporó en `companion/`; ver COMPANION-VALIDATION.md. No había pruebas ni package.json en la base; no se encontraron issues abiertos al consultar GitHub.
 
 ## Arquitectura observada
 
@@ -24,7 +24,7 @@ Pruebas: umbral seguido de ended con IDs distintos; duplicación tras JSON/recar
 
 ## Riesgos y siguientes pasos
 
-- Antes de publicar, validar el protocolo real de Companion: el transporte conservador espera `window.postMessage` desde el mismo window/origen; no autoriza ventanas o iframes ajenos.
+- El protocolo original de Companion ya está comprobado mediante sus scripts y APIs Chrome simuladas; antes de publicar, validar en Chrome real: el transporte conservador espera `window.postMessage` desde el mismo window/origen; no autoriza ventanas o iframes ajenos.
 - Rewatch/retroceso deliberado debe ser una acción explícita que reinicie el marcador. Esta versión protege avance automático, no añade ese flujo.
 - Títulos homónimos todavía se identifican por nombre; un próximo paso es usar IDs de metadatos y proveedor, con revisión humana para fusiones.
 - El campo legacy `seen` no constituye un total exacto multitemporada; el nuevo historial sí conserva temporada/episodio. Hace falta un modelo por episodio antes de calcular totales globales.
