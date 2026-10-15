@@ -15,8 +15,6 @@ jobs:
     # Standard public-repository runner; no paid larger runner or deployment.
     runs-on: ubuntu-24.04
     timeout-minutes: 8
-    env:
-      CODEX_HOME: ${{ runner.temp }}/arx-codex-state
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,6 +24,8 @@ jobs:
           node-version: '24'
       - name: Install reviewed tools in an isolated prefix
         run: |
+          export CODEX_HOME="$RUNNER_TEMP/arx-codex-state"
+          echo "CODEX_HOME=$CODEX_HOME" >> "$GITHUB_ENV"
           npm install --global --prefix "$RUNNER_TEMP/arx-tools" rea-agents@6.5.0 @openai/codex@0.162.1 --ignore-scripts --no-audit --no-fund
           mkdir -p "$RUNNER_TEMP/arx-evidence"
           "$RUNNER_TEMP/arx-tools/bin/rea" setup --client codex --yes --json > "$RUNNER_TEMP/arx-evidence/setup.json"
