@@ -1,0 +1,58 @@
+{
+  "healthy": false,
+  "environment_healthy": false,
+  "availableProviders": null,
+  "providerInspections": [
+    {
+      "id": "ghidra",
+      "configured": false,
+      "available": false,
+      "providerVersion": null,
+      "registrationEnvironment": {},
+      "checks": [
+        {
+          "name": "configuration",
+          "ok": false,
+          "code": "not_configured",
+          "detail": "GHIDRA_INSTALL_DIR is not set",
+          "remediation": "Set GHIDRA_INSTALL_DIR to an extracted Ghidra 12.1.x release directory.",
+          "classification": "missing_analysis_engine"
+        }
+      ]
+    },
+    {
+      "id": "ida",
+      "configured": false,
+      "available": false,
+      "providerVersion": null,
+      "registrationEnvironment": {},
+      "checks": [
+        {
+          "name": "registration",
+          "ok": false,
+          "code": "not_configured",
+          "detail": "IDA MCP registration is not configured.",
+          "remediation": "Set REA_IDA_MCP_CONFIG to your upstream IDA MCP registration JSON; see docs/ida-provider.md.",
+          "classification": "missing_analysis_engine"
+        }
+      ]
+    },
+    {
+      "id": "jadx",
+      "configured": false,
+      "available": false,
+      "providerVersion": null,
+      "registrationEnvironment": {},
+      "checks": [
+        {
+          "name": "configuration",
+          "ok": false,
+          "code": "not_configured",
+          "detail": "Set REA_JADX_MCP_JAR to the absolute path of a caller-supplied jadx-headless-mcp 0.7.1 JAR. REA does not download or install it.",
+          "remediation": "Set REA_JADX_MCP_JAR to the absolute path of a caller-supplied jadx-headless-mcp 0.7.1 JAR. REA does not download or install it.",
+          "classification": "missing_analysis_engine"
+        }
+      ]
+    }
+  ]
+}

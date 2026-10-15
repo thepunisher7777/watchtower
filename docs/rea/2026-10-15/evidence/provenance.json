@@ -1,0 +1,10 @@
+{
+  "name": "rea-agents",
+  "version": "6.5.0",
+  "shasum": "7ea5e6f669bc18c45dbf5dba653edaa1ada07ab3",
+  "integrity": "sha512-C6BG7LyrAdR74mSjertM6PrxJkcNZ2bfQNOJornPo9erDEp2tyPRVYPnV5Yodr+1RqewCQla68WulXlVnveD+A==",
+  "repository": "https://github.com/morluto/rea",
+  "license": "MIT",
+  "integrity_verified": true,
+  "upstream_commit": "d7651b6a0dde6cfe658144cc52794ae6aaf23306"
+}

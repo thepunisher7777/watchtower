@@ -1,0 +1,10 @@
+# Portable alternative to the absolute remote installation path.
+# Merge only this table; never replace the rest of ~/.codex/config.toml.
+# Run official scoped setup to install the matching workflow instructions.
+[mcp_servers.rea]
+command = "npx"
+args = ["-y", "rea-agents@6.5.0", "mcp"]
+startup_timeout_sec = 30
+
+[mcp_servers.rea.env]
+npm_config_ignore_scripts = "true"

@@ -1,0 +1,290 @@
+{
+  "server": {
+    "name": "rea",
+    "version": "6.5.0"
+  },
+  "tool": "inspect_artifact",
+  "evidence": {
+    "evidence_id": "ev_8175e216dd9a751f6d2c7ead761e71fae56b83f0517ba77e660104bd0edf49cd",
+    "subject": {
+      "name": "videojs-public-package.zip",
+      "digest": {
+        "sha256": "dced933cd1c98e06a1dafee80c7d82c57513b06f1096c9764b93516054c3ba59"
+      },
+      "local_path": "/workspace/scratch/ff3bbbc2d51f/videojs-public-package.zip",
+      "format": "zip",
+      "architecture": null
+    },
+    "provider": {
+      "id": "rea-artifact-graph",
+      "name": "REA safe artifact graph provider",
+      "version": "1"
+    },
+    "analysis_profile": null,
+    "predicate_type": "rea.analysis",
+    "operation": "inspect_artifact",
+    "parameters": {
+      "integrity_policy": "fail"
+    },
+    "raw_result": null,
+    "normalized_result": {
+      "inspection_id": "ai_ed2e2351e51826864f29dc434c5c26a09f49e0e47cca57bfd82c6bc325436a26",
+      "subject": {
+        "manifest_id": "agm_32572bb928f3b4fab9a5f647dcd8e1020daff3dc050cef61102e8accb0974994",
+        "root_artifact_id": "art_96ff89fe0a46e85c7c810a0d4cdf978f0c8880b7fe5c8b1bcc725748a7f0dc3c",
+        "root_sha256": "dced933cd1c98e06a1dafee80c7d82c57513b06f1096c9764b93516054c3ba59",
+        "root_format": "zip"
+      },
+      "substeps": [
+        {
+          "substep_id": "ais_b0d22793a6b34f05a33d229be1d6cbe5e20d2f0a735dc287a18291c365f69cbf",
+          "operation": "inventory_artifact",
+          "status": "completed",
+          "evidence_id": "ev_779888659f30c7ebc464221587e37601d384b349d16e11000d6289826649df74",
+          "evidence": {
+            "evidence_id": "ev_779888659f30c7ebc464221587e37601d384b349d16e11000d6289826649df74",
+            "subject": {
+              "name": "videojs-public-package.zip",
+              "digest": {
+                "sha256": "dced933cd1c98e06a1dafee80c7d82c57513b06f1096c9764b93516054c3ba59"
+              },
+              "local_path": "/workspace/scratch/ff3bbbc2d51f/videojs-public-package.zip",
+              "format": "zip",
+              "architecture": null
+            },
+            "provider": {
+              "id": "rea-artifact-graph",
+              "name": "REA safe artifact graph provider",
+              "version": "1"
+            },
+            "analysis_profile": null,
+            "predicate_type": "rea.analysis",
+            "operation": "inventory_artifact",
+            "parameters": {
+              "integrity_policy": "fail"
+            },
+            "raw_result": null,
+            "normalized_result": {
+              "manifest": {
+                "manifest_id": "agm_32572bb928f3b4fab9a5f647dcd8e1020daff3dc050cef61102e8accb0974994",
+                "root_artifact_id": "art_96ff89fe0a46e85c7c810a0d4cdf978f0c8880b7fe5c8b1bcc725748a7f0dc3c",
+                "root_sha256": "dced933cd1c98e06a1dafee80c7d82c57513b06f1096c9764b93516054c3ba59",
+                "root_format": "zip",
+                "graph_sha256": "c273d4b662fe32e4bd0541ed8f5e05414daaea63fa1d00adfbc8f6a88eec9e50",
+                "node_count": 4,
+                "occurrence_count": 4,
+                "edge_count": 3
+              },
+              "nodes": [
+                {
+                  "artifact_id": "art_30bc13cde1ca23c80b15f9dc407e5d292dcb3bbf12cbc136345e6de49310f6ec",
+                  "format": "file",
+                  "sha256": "25be5c0d5db286add77f5e4d21886800cf38296f50c71fc2d582a2223312b23c",
+                  "size": 867,
+                  "media_type": null,
+                  "architecture": null,
+                  "content_state": "embedded",
+                  "limitations": []
+                },
+                {
+                  "artifact_id": "art_4177b87085e012a8ebabc09844d1d668575f63655a0c5cc1ff5ef9684ac21f19",
+                  "format": "file",
+                  "sha256": "2bc55260fe4859146528ada8326640d95a0daba5ed36895c946ad881bfebdc50",
+                  "size": 7526,
+                  "media_type": null,
+                  "architecture": null,
+                  "content_state": "embedded",
+                  "limitations": []
+                },
+                {
+                  "artifact_id": "art_92e40d41a04ca8315e133d6cf30426c9c01dfe88f6a1f8149132a2440c414c9e",
+                  "format": "file",
+                  "sha256": "17dc7bef7c94b928399419f27bdc575a776b4529b241c3a042fd13d4aa3f6f4b",
+                  "size": 1867048,
+                  "media_type": null,
+                  "architecture": null,
+                  "content_state": "embedded",
+                  "limitations": []
+                },
+                {
+                  "artifact_id": "art_96ff89fe0a46e85c7c810a0d4cdf978f0c8880b7fe5c8b1bcc725748a7f0dc3c",
+                  "format": "zip",
+                  "sha256": "dced933cd1c98e06a1dafee80c7d82c57513b06f1096c9764b93516054c3ba59",
+                  "size": 1875763,
+                  "media_type": null,
+                  "architecture": null,
+                  "content_state": "materialized",
+                  "limitations": []
+                }
+              ],
+              "occurrences": [
+                {
+                  "occurrence_id": "occ_470ecb0233bb43e316a42e30d41baf63645c7f0f3c4d3f0b04732e47987b900c",
+                  "artifact_id": "art_96ff89fe0a46e85c7c810a0d4cdf978f0c8880b7fe5c8b1bcc725748a7f0dc3c",
+                  "parent_occurrence_id": null,
+                  "logical_path": ".",
+                  "entry_kind": "file",
+                  "artifact_kind": "container",
+                  "artifact_format": "zip",
+                  "declared_size": 1875763,
+                  "compressed_size": null,
+                  "executable": false,
+                  "encrypted": false,
+                  "hash_status": "verified",
+                  "source_location": null,
+                  "limitations": []
+                },
+                {
+                  "occurrence_id": "occ_9bfdcf87c158e0574f1874273f801d5f0c8487935cb0473bdf4623caabd939b9",
+                  "artifact_id": "art_30bc13cde1ca23c80b15f9dc407e5d292dcb3bbf12cbc136345e6de49310f6ec",
+                  "parent_occurrence_id": "occ_470ecb0233bb43e316a42e30d41baf63645c7f0f3c4d3f0b04732e47987b900c",
+                  "logical_path": "LICENSE",
+                  "entry_kind": "file",
+                  "artifact_kind": "resource",
+                  "artifact_format": "file",
+                  "declared_size": 867,
+                  "compressed_size": 867,
+                  "executable": false,
+                  "encrypted": false,
+                  "hash_status": "verified",
+                  "source_location": null,
+                  "limitations": []
+                },
+                {
+                  "occurrence_id": "occ_47d7dfe0b0029aa69a6673ee1aba7e73b7284bb399e5c2fe82c50c2ee229f90d",
+                  "artifact_id": "art_92e40d41a04ca8315e133d6cf30426c9c01dfe88f6a1f8149132a2440c414c9e",
+                  "parent_occurrence_id": "occ_470ecb0233bb43e316a42e30d41baf63645c7f0f3c4d3f0b04732e47987b900c",
+                  "logical_path": "dist/video.cjs.js",
+                  "entry_kind": "file",
+                  "artifact_kind": "javascript",
+                  "artifact_format": "javascript-bundle",
+                  "declared_size": 1867048,
+                  "compressed_size": 1867048,
+                  "executable": false,
+                  "encrypted": false,
+                  "hash_status": "verified",
+                  "source_location": null,
+                  "limitations": []
+                },
+                {
+                  "occurrence_id": "occ_6bc626c366130a9c00f526f2dc35bf462fa64d96055726200b0825ec267a581a",
+                  "artifact_id": "art_4177b87085e012a8ebabc09844d1d668575f63655a0c5cc1ff5ef9684ac21f19",
+                  "parent_occurrence_id": "occ_470ecb0233bb43e316a42e30d41baf63645c7f0f3c4d3f0b04732e47987b900c",
+                  "logical_path": "package.json",
+                  "entry_kind": "file",
+                  "artifact_kind": "resource",
+                  "artifact_format": "file",
+                  "declared_size": 7526,
+                  "compressed_size": 7526,
+                  "executable": false,
+                  "encrypted": false,
+                  "hash_status": "verified",
+                  "source_location": null,
+                  "limitations": []
+                }
+              ],
+              "edges": [
+                {
+                  "edge_id": "edge_19a55cdc6b440ae2b90e86959aa626d264d131c7e6ab385ad596773bdd54b065",
+                  "ordinal": 0,
+                  "parent_artifact_id": "art_96ff89fe0a46e85c7c810a0d4cdf978f0c8880b7fe5c8b1bcc725748a7f0dc3c",
+                  "relation": "contains",
+                  "occurrence_id": "occ_9bfdcf87c158e0574f1874273f801d5f0c8487935cb0473bdf4623caabd939b9",
+                  "producer": null
+                },
+                {
+                  "edge_id": "edge_5ab395841f24ac4229af09805b481fbbc00eb5b99c3afb4810def8eca3d63c15",
+                  "ordinal": 1,
+                  "parent_artifact_id": "art_96ff89fe0a46e85c7c810a0d4cdf978f0c8880b7fe5c8b1bcc725748a7f0dc3c",
+                  "relation": "contains",
+                  "occurrence_id": "occ_6bc626c366130a9c00f526f2dc35bf462fa64d96055726200b0825ec267a581a",
+                  "producer": null
+                },
+                {
+                  "edge_id": "edge_b4fca26917c7d4e56d6b632bfe41510f7acb445f91151b9359c64bcc09f02222",
+                  "ordinal": 2,
+                  "parent_artifact_id": "art_96ff89fe0a46e85c7c810a0d4cdf978f0c8880b7fe5c8b1bcc725748a7f0dc3c",
+                  "relation": "contains",
+                  "occurrence_id": "occ_47d7dfe0b0029aa69a6673ee1aba7e73b7284bb399e5c2fe82c50c2ee229f90d",
+                  "producer": null
+                }
+              ],
+              "provenance": [],
+              "integrity_contradictions": [],
+              "coverage": {
+                "scope": "container-entries",
+                "status": "complete"
+              },
+              "limitations": [
+                "ZIP inventory lists central-directory entries only. Non-entry bytes, including an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+              ],
+              "coverage_status": "complete"
+            },
+            "confidence": "observed",
+            "authority": "shipped-artifact",
+            "environment": null,
+            "limitations": [
+              "ZIP inventory lists central-directory entries only. Non-entry bytes, including an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+            ],
+            "relationship_coverage": null,
+            "locations": [],
+            "evidence_links": []
+          }
+        }
+      ],
+      "observations": [
+        {
+          "observation_id": "aio_58e49ccf5a7a90cc1d301b45ebbe7b09d3f1dfa41fe9649c5c8491a9df4b0e3d",
+          "kind": "root-manifest",
+          "subject": "art_96ff89fe0a46e85c7c810a0d4cdf978f0c8880b7fe5c8b1bcc725748a7f0dc3c",
+          "value": {
+            "manifest_id": "agm_32572bb928f3b4fab9a5f647dcd8e1020daff3dc050cef61102e8accb0974994",
+            "root_artifact_id": "art_96ff89fe0a46e85c7c810a0d4cdf978f0c8880b7fe5c8b1bcc725748a7f0dc3c",
+            "root_sha256": "dced933cd1c98e06a1dafee80c7d82c57513b06f1096c9764b93516054c3ba59",
+            "root_format": "zip",
+            "graph_sha256": "c273d4b662fe32e4bd0541ed8f5e05414daaea63fa1d00adfbc8f6a88eec9e50",
+            "node_count": 4,
+            "occurrence_count": 4,
+            "edge_count": 3
+          },
+          "evidence_id": "ev_779888659f30c7ebc464221587e37601d384b349d16e11000d6289826649df74"
+        }
+      ],
+      "hypotheses": [],
+      "contradictions": [],
+      "unexplored_branches": [],
+      "next_probes": [],
+      "coverage": {
+        "status": "complete-within-substeps",
+        "substeps_completed": 1,
+        "observations_retained": 1,
+        "observations_omitted": 0,
+        "hypotheses_retained": 0,
+        "hypotheses_omitted": 0,
+        "unexplored_branches_retained": 0,
+        "unexplored_branches_omitted": 0,
+        "next_probes_retained": 0,
+        "next_probes_omitted": 0
+      },
+      "evidence_links": [
+        "ev_779888659f30c7ebc464221587e37601d384b349d16e11000d6289826649df74"
+      ],
+      "limitations": [
+        "Inspection derives bounded static hypotheses and next probes; it does not execute the artifact or claim format-specific semantics.",
+        "ZIP inventory lists central-directory entries only. Non-entry bytes, including an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+      ]
+    },
+    "confidence": "observed",
+    "authority": "shipped-artifact",
+    "environment": null,
+    "limitations": [
+      "Inspection derives bounded static hypotheses and next probes; it does not execute the artifact or claim format-specific semantics.",
+      "ZIP inventory lists central-directory entries only. Non-entry bytes, including an APK Signing Block before the central directory or a ZIP comment after it, are not occurrences."
+    ],
+    "relationship_coverage": null,
+    "locations": [],
+    "evidence_links": [
+      "ev_779888659f30c7ebc464221587e37601d384b349d16e11000d6289826649df74"
+    ]
+  }
+}
