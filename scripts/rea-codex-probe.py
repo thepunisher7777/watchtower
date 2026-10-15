@@ -27,7 +27,13 @@ def main():
               "isolated": args.isolated, "model_turns_sent": 0, "methods": []}
     # Reserve exclusively before starting processes. Existing reports survive.
     with args.output.open("x", encoding="utf-8") as report:
-        with tempfile.TemporaryDirectory(prefix="arx-codex-probe-") as temp:
+        # Codex refuses helper binaries under /tmp. Use its own private cache
+        # space instead; the probe state is still removed on exit.
+        state_parent = pathlib.Path.home()/".cache/arx-codex-probes"
+        if state_parent.is_symlink():
+            raise RuntimeError("Probe cache must not be a symlink")
+        state_parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        with tempfile.TemporaryDirectory(prefix="probe-", dir=state_parent) as temp:
             env = os.environ.copy()
             if args.isolated:
                 rea = args.codex.parent/"rea"

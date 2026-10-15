@@ -1,0 +1,26 @@
+{
+  "discovery_passed": true,
+  "tool_execution": "passed",
+  "isolated": true,
+  "model_turns_sent": 0,
+  "methods": [
+    "initialize",
+    "mcpServerStatus/list",
+    "thread/start",
+    "mcpServer/tool/call",
+    "mcpServer/tool/call"
+  ],
+  "server": {
+    "name": "rea",
+    "title": null,
+    "version": "6.5.0",
+    "description": null,
+    "icons": null,
+    "websiteUrl": null
+  },
+  "tool_count": 207,
+  "evidence_id": "ev_9e5c2aade1358b2a1ca981f043511158656b70259bb7ee14cb7d6816ab012f69",
+  "artifact_sha256": "a2644b02c8aa837302754ea3cd954614d1fe437ab214f0468d67546b68f872c7",
+  "stderr_bytes": 734,
+  "passed": true
+}

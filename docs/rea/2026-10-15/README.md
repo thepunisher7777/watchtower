@@ -6,16 +6,16 @@ Fecha: 15 de octubre de 2026. Rama `docs/rea-codex-work-20261015`, basada en `fe
 
 | Componente | Resultado |
 | --- | --- |
-| REA | **Instalado, 6.5.0**, en este contenedor remoto Linux x86_64 |
+| REA | **Instalado, 6.5.0**, recuperable con bootstrap en un prefijo de trabajo separado |
 | Codex CLI | **Instalado, 0.162.1**; reconoce la configuración y descubre las 207 herramientas mediante su app-server |
-| Llamada de análisis desde una sesión Codex | **Pendiente**: `thread/start` no respondió en la prueba; una configuración aislada también agotó el plazo durante `initialize`. No se atribuye una causa de autenticación sin evidencia |
+| Llamada de análisis desde Codex | **Comprobada en GitHub Actions**: hilo efímero, `open_binary` e `inspect_artifact`, con hash validado y sin enviar un turno al modelo |
 | Servidor MCP | **Funcional**: inicialización, inventario, `binary_session`, `open_binary` e `inspect_artifact` comprobados |
-| Work, ejecución mediante terminal/SDK | **Comprobada**: dos análisis reales por MCP stdio desde el entorno de esta conversación |
+| Work, skill y terminal/SDK | **Skill `arx-rea` guardada en la cuenta**, validada con una operación MCP real y una prueba independiente |
 | Work, herramientas nativas en el chat | **No conectado**: no se ha añadido REA al catálogo de herramientas de Work |
 | Motores nativos Ghidra/Hopper/IDA | No detectados ni instalados; descompilación nativa no comprobada |
-| Análisis JavaScript avanzado | Bloqueado por `ps`: `fatal library error, lookup self`, durante la verificación de propiedad de procesos |
+| Análisis JavaScript avanzado | **Comprobado en GitHub Actions** sobre módulo ficticio: 6 nodos y 5 relaciones; el contenedor Work sigue bloqueado por `ps` |
 
-La instalación no está en el PC ni en el iPhone del usuario. Parte de la configuración anterior sobrevivió, mientras que ejecutables e instrucciones no estaban disponibles al comenzar. No existe garantía de persistencia del contenedor tras su reciclado. Los archivos de esta rama permiten reconstruir la instalación.
+La instalación no está en el PC ni en el iPhone del usuario. Parte de la configuración anterior sobrevivió, mientras que ejecutables e instrucciones no estaban disponibles al comenzar. No existe garantía de persistencia del contenedor tras su reciclado. Se ha recuperado en `/workspace/scratch/ff3bbbc2d51f/arx-tools-runtime`; el bootstrap de esta rama y de la skill permite reconstruirla bajo demanda, sin depender de `/root/.local`.
 
 ## Auditoría y procedencia
 
@@ -28,7 +28,7 @@ La instalación no está en el PC ni en el iPhone del usuario. Parte de la confi
 
 ## Cambios y comandos ejecutados
 
-Instalación en prefijo separado, sin sustituir Node ni herramientas del sistema:
+Comandos de la instalación inicial en prefijo separado (históricos; para recuperarla usar el bootstrap del apartado Uso futuro):
 
 ```bash
 npm install --global --prefix /root/.local rea-agents@6.5.0 @openai/codex@0.162.1 --ignore-scripts --no-audit --no-fund
@@ -44,7 +44,7 @@ Se instalaron 175 paquetes con la instalación conjunta; entre las dependencias 
 
 Antes de escribir se guardó una copia privada con fecha en `/root/.rea/config-backups/`; setup conservó además su backup/recovery oficial. Se compararon los TOML antes/después, excluyendo solo `mcp_servers.rea`: **toda la configuración ajena permaneció idéntica**. No se publican esos archivos completos porque pueden contener configuración privada de otros servidores.
 
-La configuración activa utiliza `/root/.local/bin/rea mcp`, timeout de arranque 30 s. Setup restauró el workflow oficial en `/root/.agents/skills/reverse-engineer-anything`, con referencias compatibles con 6.5.0. Instalar instrucciones no incorpora herramientas a una conversación ya iniciada. [Configuración portable sin secretos](codex-config.example.toml).
+La configuración recuperada utiliza `/workspace/scratch/ff3bbbc2d51f/arx-tools-runtime/bin/rea mcp`, timeout de arranque 30 s. Setup restauró el workflow oficial en `/root/.agents/skills/reverse-engineer-anything`, con referencias compatibles con 6.5.0. Instalar instrucciones no incorpora herramientas a una conversación ya iniciada. [Configuración portable sin secretos](codex-config.example.toml).
 
 ## Pruebas y evidencias
 
@@ -58,23 +58,24 @@ La configuración activa utiliza `/root/.local/bin/rea mcp`, timeout de arranque
 
 ## Uso futuro
 
-En este contenedor: `/root/.local/bin/rea` y `/root/.local/bin/codex`. En un equipo propio compatible, revisar el plan de instalación y ejecutar los mismos paquetes con un prefijo del usuario, o utilizar la configuración portable fijada a 6.5.0. `rea setup --client codex --dry-run --json` muestra cambios; `--yes` aplica el alcance aprobado. Reiniciar Codex y consultar `/mcp`. Solicitud ejemplo: «Usa REA para inspeccionar estáticamente este ZIP autorizado, conserva el hash y explica sus límites». La ejecución desde un turno Codex sigue pendiente de validación aquí.
+Desde Work, invocar «Usa $arx-rea para analizar este archivo autorizado». La skill está guardada en la cuenta y utiliza las herramientas por terminal; no crea por sí sola nuevas herramientas MCP en el catálogo nativo del chat.
 
-Prueba reproducible desde la raíz de este repositorio, cambiando las rutas según el equipo:
+Para reconstruir una instalación desde este checkout, revisar primero el preview y aplicar el alcance ya autorizado:
 
 ```bash
-python scripts/rea-create-fixture.py /tmp/arx-rea-new-fixture.zip
-node scripts/rea-mcp-probe.mjs /root/.local/lib/node_modules/rea-agents /tmp/arx-rea-new-fixture.zip /tmp/arx-rea-result.json
-python scripts/rea-codex-probe.py /root/.local/bin/codex /tmp/arx-rea-new-fixture.zip /tmp/arx-codex-discovery.json
+python scripts/rea-bootstrap.py --configure-codex
+python scripts/rea-bootstrap.py --apply --configure-codex
 ```
 
-El último script comprueba descubrimiento sin pedir inferencia al modelo. `--call` intenta además crear un hilo efímero y ejecutar herramientas, y registra el fallo si no puede; esa variante **no pasó** en este entorno. Ambos clientes cierran sus procesos al terminar. No hay cron, automatizaciones, daemon configurado ni actividad periódica añadidos.
+El prefijo predeterminado es `arx-tools-runtime` junto al checkout. El script comprueba la procedencia en npm oficial, fija versiones, desactiva lifecycle scripts y verifica que setup conserve la configuración ajena. `--prefix` permite usar una caché dedicada. No instala Ghidra, actualiza Node ni configura servicios periódicos.
+
+Para comprobar transporte y evidencia con datos ficticios, usar `rea-healthcheck.py --rea ABS_REA --output ABS_JSON_NUEVO`. El probe Codex admite `--isolated --call` y verifica que la evidencia corresponde al SHA-256 del ZIP. Usa estado temporal privado y drena stderr sin publicarlo. Nunca envía `turn/start`. La variante completa pasó en el runner GitHub; crear un hilo en este contenedor Work sigue agotando el plazo.
 
 ## Work y persistencia
 
 La documentación oficial https://learn.chatgpt.com/docs/extend/mcp distingue el archivo local de Codex de los conectores de Work web: el chat alojado no lee automáticamente ese TOML. En esta sesión no hay un mecanismo expuesto para registrar arbitrariamente REA stdio como herramienta nativa. La búsqueda mediante Plugin Management no devolvió un plugin de REA identificable; no se instaló el resultado irrelevante.
 
-Alternativa operativa comprobada: ejecutar REA por MCP SDK desde la terminal de Work. Una futura conexión nativa necesitaría un plugin/transporte soportado y su prueba desde el chat. No se abrió un puerto público ni se expuso el filesystem mediante un servidor sin autenticación. La app de escritorio en otro ordenador requerirá su propia instalación/configuración.
+Integración operativa comprobada: skill `arx-rea` guardada en la cuenta (commit `13d924a`) y ejecución por MCP SDK desde la terminal de Work. Una futura conexión nativa necesitaría un plugin/transporte soportado y su prueba desde el chat. No se abrió un puerto público ni se expuso el filesystem mediante un servidor sin autenticación. La app de escritorio en otro ordenador requerirá su propia instalación/configuración.
 
 ## Ecosistema ARX y siguientes aplicaciones
 
@@ -84,7 +85,7 @@ Localizados sin modificar: Ledger en `thepunisher7777/ledger-app`, checkout de d
 2. **NEXO — interoperabilidad de notas** (viabilidad alta, utilidad alta): examinar paquetes de exportación públicos o ficticios, diseñar mapeo Markdown/JSON/ICS y probar round-trip. En el código disponible D1/R2 usan revisiones y devuelven 409 ante escrituras en conflicto; REA no aporta más que la revisión de fuente para esa lógica.
 3. **RENTARX — contratos de feeds autorizados** (viabilidad media, utilidad condicionada al permiso): inspeccionar ejemplos cedidos de JSON/XML y normalización. Su registro de conectores exige acuerdo vigente, hosts y cuota; no demuestra inventario de portales conectado. REA no concede licencias, acceso a APIs privadas ni permiso de extracción.
 
-Coste incremental de lo ejecutado: sin servicio de pago contratado, sin llamadas a modelos ni claves nuevas, sin tareas programadas. El alojamiento/uso de Work existente y una futura máquina persistente se facturan según sus condiciones; no se promete coste total cero. Pendiente prioritario: validar un turno Codex completo en un host estable y compatible; después valorar Ghidra solo si existe una misión nativa concreta.
+Coste incremental de lo ejecutado: sin servicio de pago contratado, sin llamadas a modelos ni claves nuevas, sin tareas programadas. El alojamiento/uso de Work existente y una futura máquina persistente se facturan según sus condiciones; no se promete coste total cero. Las llamadas a herramientas desde Codex ya se validaron sin turno de inferencia en GitHub. Valorar Ghidra solo si existe una misión nativa concreta; un turno al modelo no es necesario para probar el MCP y no se ha enviado.
 
 ## Ampliación: verificación bajo demanda y regresiones ARX
 
@@ -98,4 +99,19 @@ Puede indicarse `--rea /ruta/al/bin/rea`. Se conserva el alias del ejecutable al
 
 [Resultado real del verificador](evidence/healthcheck.json). [Regresiones de las cuatro aplicaciones](evidence/app-regressions.json): Ledger completó todas las suites locales configuradas; NEXO 42/42; RENTARX 28/28; WatchTower 19/19 y comprobación sintáctica correcta. Se usaron fixtures ficticias y entornos de prueba locales. Esto no sustituye una prueba manual del despliegue o de un iPhone físico.
 
-La ampliación no modifica código de las aplicaciones, dependencias de sus paquetes, despliegues ni esquemas de bases de datos. Se mantiene la ejecución bajo demanda para evitar actividad periódica innecesaria. Los bloqueos nativos de Work, de la creación de un hilo en Codex y del supervisor de procesos continúan pendientes; no se presentan como reparados por este verificador.
+La ampliación no modifica código de las aplicaciones, dependencias de sus paquetes, despliegues ni esquemas de bases de datos. Se mantiene la ejecución bajo demanda para evitar actividad periódica innecesaria. Los límites del contenedor Work continúan: el verificador no altera su PID/procfs ni registra un MCP nativo. La ejecución completa se ha validado en el runner compatible descrito a continuación.
+
+
+## Verificación completa en un host compatible
+
+[GitHub Actions: ejecución aprobada](https://github.com/thepunisher7777/watchtower/actions/runs/38725874091), commit `6c43c7c17dec406d8586c433c8584d3a1dd9ccdb`, job `116391466149`:
+
+- [Transporte y fixture por MCP](evidence/hosted-health.json): saludable, REA 6.5.0, 207 herramientas.
+- [Análisis JavaScript real](evidence/hosted-javascript.json): Evidence `ev_2a3e9047c68ef91bf7f0249480410bac69c12975dd4b13370f85eb7591117e8a`, 6 nodos y 5 relaciones sobre código propio ficticio, sin ejecutar ese código.
+- [Codex invoca REA](evidence/hosted-codex.json): `thread/start` y dos `mcpServer/tool/call` aprobados, Evidence `ev_9e5c2aade1358b2a1ca981f043511158656b70259bb7ee14cb7d6816ab012f69`, SHA-256 validado, cero turnos enviados a modelos.
+
+El workflow usa `ubuntu-24.04` estándar y solo corre si el repositorio sigue siendo público. Tiene permisos `contents: read`, ocho minutos de límite, sin credenciales persistidas de checkout, sin despliegue y sin cron. Se ejecuta manualmente o al modificar sus scripts en esta rama. Los resultados resumidos se conservan en los logs; no se suben artifacts ni cachés que añadan almacenamiento facturable. Referencia de runners: https://docs.github.com/en/actions/reference/runners/github-hosted-runners.
+
+La primera definición del workflow falló antes de iniciar jobs por configuración; se corrigió la resolución de `RUNNER_TEMP` dentro del step. El run enlazado superó todos los steps, incluidos JavaScript y Codex. No se declaró resuelto el problema del contenedor: se encontró y verificó un entorno que sí cumple los requisitos.
+
+La skill se creó con Skill Creator, se validó y guardó mediante push a la cuenta. Incluye bootstrap y probes revisados; una prueba independiente volvió a inspeccionar el ZIP ficticio y comprobó su hash y sus tres entradas sin cambiar configuración ni producción. La skill es un flujo de terminal, no un servidor remoto público ni un registro MCP nativo nuevo en Work.

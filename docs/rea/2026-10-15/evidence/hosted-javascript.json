@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "target": "synthetic-owned-module",
+  "target_executed": false,
+  "evidence_id": "ev_2a3e9047c68ef91bf7f0249480410bac69c12975dd4b13370f85eb7591117e8a",
+  "graph_nodes": 6,
+  "graph_edges": 5,
+  "operation": "analyze_javascript_application"
+}
