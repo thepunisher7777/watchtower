@@ -1,0 +1,53 @@
+name: REA isolated verification
+on:
+  workflow_dispatch:
+  push:
+    branches: [docs/rea-codex-work-20261015]
+    paths:
+      - '.github/workflows/rea-verification.yml'
+      - 'scripts/rea-*.py'
+      - 'scripts/rea-*.mjs'
+permissions:
+  contents: read
+jobs:
+  verify:
+    if: github.event.repository.private == false
+    # Standard public-repository runner; no paid larger runner or deployment.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    env:
+      CODEX_HOME: ${{ runner.temp }}/arx-codex-state
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install reviewed tools in an isolated prefix
+        run: |
+          npm install --global --prefix "$RUNNER_TEMP/arx-tools" rea-agents@6.5.0 @openai/codex@0.162.1 --ignore-scripts --no-audit --no-fund
+          mkdir -p "$RUNNER_TEMP/arx-evidence"
+          "$RUNNER_TEMP/arx-tools/bin/rea" setup --client codex --yes --json > "$RUNNER_TEMP/arx-evidence/setup.json"
+      - name: Verify MCP with synthetic data
+        run: python scripts/rea-healthcheck.py --rea "$RUNNER_TEMP/arx-tools/bin/rea" --output "$RUNNER_TEMP/arx-evidence/health.json"
+      - name: Analyze owned JavaScript with real process ownership checks
+        if: always()
+        run: python scripts/rea-javascript-check.py "$RUNNER_TEMP/arx-tools/bin/rea" "$RUNNER_TEMP/arx-evidence/javascript.json"
+      - name: Execute REA through Codex without a model turn
+        if: always()
+        run: |
+          python scripts/rea-create-fixture.py "$RUNNER_TEMP/arx-evidence/fixture.zip"
+          python scripts/rea-codex-probe.py "$RUNNER_TEMP/arx-tools/bin/codex" "$RUNNER_TEMP/arx-evidence/fixture.zip" "$RUNNER_TEMP/arx-evidence/codex.json" --isolated --call --timeout 90
+      - name: Publish bounded verification evidence in job logs
+        if: always()
+        shell: python
+        run: |
+          import json, os, pathlib
+          root = pathlib.Path(os.environ['RUNNER_TEMP'])/'arx-evidence'
+          for name in ['health.json', 'javascript.json', 'codex.json']:
+              p = root/name
+              if p.exists() and p.stat().st_size:
+                  d = json.loads(p.read_text())
+                  d.pop('tool_names', None)
+                  print('ARX_REA_EVIDENCE', name, json.dumps(d))
