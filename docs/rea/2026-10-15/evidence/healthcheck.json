@@ -1,0 +1,28 @@
+{
+  "checked_at": "2026-10-15T09:31:31.474140+00:00",
+  "healthy": true,
+  "scope": "remote-runtime-and-synthetic-MCP",
+  "changes_configuration": false,
+  "checks": [
+    {
+      "name": "version",
+      "passed": true
+    },
+    {
+      "name": "codex-registration-and-workflow",
+      "passed": true
+    },
+    {
+      "name": "MCP-transport-and-catalog",
+      "passed": true
+    },
+    {
+      "name": "real-synthetic-artifact-analysis",
+      "passed": true
+    }
+  ],
+  "version": "6.5.0",
+  "tool_count": 207,
+  "artifact_sha256": "a2644b02c8aa837302754ea3cd954614d1fe437ab214f0468d67546b68f872c7",
+  "evidence_id": "ev_ddc0ee9ed5cbb675796abef991dabb0266e718b762446268e859ba41ab13a079"
+}

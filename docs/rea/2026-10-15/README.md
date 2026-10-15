@@ -85,3 +85,17 @@ Localizados sin modificar: Ledger en `thepunisher7777/ledger-app`, checkout de d
 3. **RENTARX — contratos de feeds autorizados** (viabilidad media, utilidad condicionada al permiso): inspeccionar ejemplos cedidos de JSON/XML y normalización. Su registro de conectores exige acuerdo vigente, hosts y cuota; no demuestra inventario de portales conectado. REA no concede licencias, acceso a APIs privadas ni permiso de extracción.
 
 Coste incremental de lo ejecutado: sin servicio de pago contratado, sin llamadas a modelos ni claves nuevas, sin tareas programadas. El alojamiento/uso de Work existente y una futura máquina persistente se facturan según sus condiciones; no se promete coste total cero. Pendiente prioritario: validar un turno Codex completo en un host estable y compatible; después valorar Ghidra solo si existe una misión nativa concreta.
+
+## Ampliación: verificación bajo demanda y regresiones ARX
+
+Se añadió `scripts/rea-healthcheck.py`, independiente de las dependencias de las apps. Comprueba versión CLI/paquete, registro Codex e instrucciones oficiales, diagnóstico MCP y una operación real sobre el ZIP ficticio creado en un directorio temporal. Verifica que el hash de la evidencia corresponde exactamente al archivo analizado. No instala, modifica configuraciones, llama modelos ni programa tareas. No acepta sobrescribir un informe existente y devuelve código de error ante una dependencia ausente o una comprobación fallida.
+
+```bash
+python scripts/rea-healthcheck.py --output /tmp/rea-health-nuevo.json
+```
+
+Puede indicarse `--rea /ruta/al/bin/rea`. Se conserva el alias del ejecutable al invocarlo: usar su ruta resuelta internamente hacía que el propio doctor considerase desalineado el registro, aunque el launcher instalado era correcto. Se corrigió el verificador sin alterar REA ni relajar comprobaciones. Se probaron además los casos negativos de ejecutable ausente e informe ya existente.
+
+[Resultado real del verificador](evidence/healthcheck.json). [Regresiones de las cuatro aplicaciones](evidence/app-regressions.json): Ledger completó todas las suites locales configuradas; NEXO 42/42; RENTARX 28/28; WatchTower 19/19 y comprobación sintáctica correcta. Se usaron fixtures ficticias y entornos de prueba locales. Esto no sustituye una prueba manual del despliegue o de un iPhone físico.
+
+La ampliación no modifica código de las aplicaciones, dependencias de sus paquetes, despliegues ni esquemas de bases de datos. Se mantiene la ejecución bajo demanda para evitar actividad periódica innecesaria. Los bloqueos nativos de Work, de la creación de un hilo en Codex y del supervisor de procesos continúan pendientes; no se presentan como reparados por este verificador.

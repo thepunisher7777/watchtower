@@ -1,0 +1,33 @@
+{
+  "scope": "local fictional fixtures; no hosted tests, production access or physical iPhone QA",
+  "results": [
+    {
+      "project": "ledger",
+      "checkout_commit": "f9fa3c14dc9122ca047ad629e9833b7c063eea84",
+      "command": "npm test",
+      "exit_code": 0,
+      "summary": "all configured local suites passed, including financial, SQL/RLS, auth and isolation tests"
+    },
+    {
+      "project": "nexo",
+      "checkout_commit": "6f8a67f6d4bc93ebd780a07294eea79a128ea066",
+      "command": "node --test tests/*.test.mjs",
+      "exit_code": 0,
+      "summary": "42 tests passed, 0 failed"
+    },
+    {
+      "project": "rentarx",
+      "checkout_commit": "c80a737c559eabcba5ef67e1a0e6dce873d0cdff",
+      "command": "npm run check",
+      "exit_code": 0,
+      "summary": "28 tests passed, 0 failed"
+    },
+    {
+      "project": "watchtower",
+      "checkout_commit": "3f2cfdb119c9294cb02885631d77860c0135325a",
+      "command": "npm test",
+      "exit_code": 0,
+      "summary": "19 tests passed, 0 failed"
+    }
+  ]
+}
