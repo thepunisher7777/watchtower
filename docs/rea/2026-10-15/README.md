@@ -54,7 +54,7 @@ La configuración recuperada utiliza `/workspace/scratch/ff3bbbc2d51f/arx-tools-
 4. [Paquete público Video.js](evidence/videojs-mcp.json): `open_binary` y `inspect_artifact` ejecutados en la misma conexión SDK. ZIP de tres archivos sin modificar de `video.js@8.24.1` (manifiesto, licencia y bundle), SHA-256 `dced933cd1c98e06a1dafee80c7d82c57513b06f1096c9764b93516054c3ba59`. Evidencia `ev_8175e216dd9a751f6d2c7ead761e71fae56b83f0517ba77e660104bd0edf49cd`. **Se comprobó estructura de paquete; no se descompiló ni se ejecutó Video.js.**
 5. [Fixture sintética reproducible](evidence/synthetic-mcp.json): manifiesto, función JS de suma y README sin datos personales. Evidencia `ev_097b8aa55fdb270f0f359b27828ddf07ffed2c1ff55bb02f4bafe5ff753bac5f`. Es una demostración identificada como tal, no un proyecto del usuario ni un resultado de mercado.
 6. [Fallo JavaScript](evidence/javascript-blocker.json): el análisis llegó al inventario pero no completó el parseo. El `ps` existente falla al invocarlo desde el supervisor de Node. La documentación exige procps compatible. No se falsificó la lista de procesos ni se omitieron las protecciones. Requiere un host con proceso/procfs compatible; instalar Ghidra no resuelve este requisito.
-7. Regresión de esta rama: `npm run check` correcto, `npm test` **19/19**, compilación sintáctica de ambos scripts Python correcta. No se ejecutaron pruebas hosted ni operaciones sobre datos reales.
+7. Regresión de esta rama: `npm run check` correcto, `npm test` **19/19**, compilación sintáctica de ambos scripts Python correcta. No se ejecutaron pruebas de backend de producción ni operaciones sobre datos reales.
 
 ## Uso futuro
 
@@ -115,3 +115,5 @@ El workflow usa `ubuntu-24.04` estándar y solo corre si el repositorio sigue si
 La primera definición del workflow falló antes de iniciar jobs por configuración; se corrigió la resolución de `RUNNER_TEMP` dentro del step. El run enlazado superó todos los steps, incluidos JavaScript y Codex. No se declaró resuelto el problema del contenedor: se encontró y verificó un entorno que sí cumple los requisitos.
 
 La skill se creó con Skill Creator, se validó y guardó mediante push a la cuenta. Incluye bootstrap y probes revisados; una prueba independiente volvió a inspeccionar el ZIP ficticio y comprobó su hash y sus tres entradas sin cambiar configuración ni producción. La skill es un flujo de terminal, no un servidor remoto público ni un registro MCP nativo nuevo en Work.
+
+Última revisión del código: [run 38726666382 aprobado](https://github.com/thepunisher7777/watchtower/actions/runs/38726666382), commit `6a67cabc7f9d8e9833fa85febab7c343d381700b`. Se volvieron a aprobar instalación, MCP, análisis JavaScript y llamadas reales desde Codex tras la mejora del estado temporal privado. [Registro de jobs y steps](evidence/final-hosted-validation.json).
